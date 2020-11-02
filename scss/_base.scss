@@ -1,0 +1,177 @@
+//font
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap');
+// variables
+$color-primary:#56a37e;
+$color-primary-light:#91cf7f;
+$color-dark:#5c5a5a;
+$color-white:#fff;
+//font-sizes
+$font-large:2rem;
+$font-extra-large:4rem;
+$font-medium:1.5rem;
+$font-small:1rem;
+//font 
+@mixin font($size,$weight) {
+    font-size:$size;
+    font-weight: $weight;
+}
+//flex 
+@mixin flex($vertical-value:initial, $horizontal-value:initial,$direction:row){
+
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    @if($horizontal-value == 'center'){
+        -webkit-box-pack:center;
+          -ms-flex-pack:center;  
+        justify-content: $horizontal-value;
+    }
+    @if($horizontal-value == 'flex-start') or ($horizontal-value == 'initial'){
+        -webkit-box-pack:start;
+          -ms-flex-pack:start;  
+        justify-content: $horizontal-value;
+    }
+    @if($horizontal-value == 'flex-end'){
+        -webkit-box-pack:end;
+          -ms-flex-pack:end;  
+        justify-content: $horizontal-value;
+    }
+    @if($horizontal-value == 'space-between') or ($horizontal-value == 'space-around') {
+        -webkit-box-pack:justify;
+          -ms-flex-pack:justify;
+        justify-content:$horizontal-value;   
+    }
+  
+
+    @if($vertical-value == 'center'){
+        -webkit-box-pack:center;
+          -ms-flex-pack:center;  
+        align-items: $vertical-value;
+    }
+    @if($vertical-value  == 'flex-start') or ($vertical-value  == 'initial'){
+        -webkit-box-pack:start;
+          -ms-flex-pack:start;  
+        align-items: $vertical-value;
+    }
+    @if($vertical-value  == 'flex-end'){
+        -webkit-box-pack:end;
+          -ms-flex-pack:end;  
+        align-items: $vertical-value;
+    }
+    @if($direction == 'column'){
+        -webkit-box-orient:vertical; 
+          -webkit-box-direction:normal;
+            -ms-flex-direction:$direction;       
+              flex-direction: $direction;
+    }
+    @if($direction == 'row'){
+        -webkit-box-orient:horizontal;
+          -webkit-box-direction:normal;
+             -ms-flex-direction:$direction;
+               flex-direction: $direction;
+    }
+    
+}
+//set text color
+@function set-text-color($color){
+    @if(lightness($color) > 50 ){
+        @return $color-dark;
+    }@else{
+        @return $color-white;
+    }
+ }
+//bg and text color
+@mixin set-background($color) {
+    background:$color;
+    color: set-text-color($color);
+}
+@function set-radial-background($color1,$color2,$alpha-value:1) {
+    @if($alpha-value < 1){
+     @return at top left,rgba($color1, $alpha-value),rgba($color2,$alpha-value);
+    }@else{
+        @return  at top left,  $color1 ,$color2;
+    }
+}
+//margin and padding loop
+$max: 100;
+$offset: 5;
+$unit: 'px'; 
+@mixin list-loop($className, $styleName) {
+  $i: 0;
+  @while $i <= $max {
+    #{$className + $i} { 
+      #{$styleName}: #{$i + $unit};
+    }
+    $i: $i + $offset;
+  }
+}
+$card-overlays:(
+    orange-overlay:(radial-gradient(set-radial-background(#f5b542,#e37a42 , 0.55)),url('../images/river-site-img.jpg')),
+    green-overlay:(radial-gradient(set-radial-background($color-primary,$color-primary-light,0.55)),url('../images/forest-site-img.jpg')),
+    blue-overlay:(radial-gradient(set-radial-background(#5094fa,#4540ca , 0.55)),url('../images/sunset-site-img.jpg')),
+    white-overlay:(radial-gradient(set-radial-background($color-white,$color-white,0.7)),url('../images/river-site-img.jpg'))
+);
+@each $overlay,$bg in $card-overlays {
+    .#{$overlay}{
+        background: $bg;
+        background-size: cover;
+        z-index:1     
+    }
+}
+ul{
+    list-style-type: none;  
+    padding: 0rem 3rem;  
+}
+@for $i from 1 to 6 {
+    .card-content li:nth-child(#{$i}):not(:first-child){ 
+       border-top: 1px solid rgba($color: black, $alpha: 0.1);
+    }
+    .card-content li:nth-child(#{$i}){
+        padding: 0.5rem;
+    }
+}
+$btn-hover:(
+    white:$color-white,
+    green:$color-primary
+);
+.btn-container{
+    @each  $color,$value in $btn-hover {
+        &.#{$color}:hover .btn{
+            cursor: pointer; 
+            -webkit-animation: pulse-#{$color} 1s ease infinite; 
+               animation: pulse-#{$color} 1s ease infinite;
+        }
+        @keyframes pulse-#{$color} {
+            0%{
+                -webkit-transform:scale(1);
+                 -ms-transform:scale(1);
+                   transform:scale(1);
+               -webkit-box-shadow:0 0 0 0 rgba($value,0.7);
+                 box-shadow: 0 0 0 0 rgba($value,0.7);
+            }
+            70%{
+                -webkit-transform:scale(1.03);
+                 -ms-transform:scale(1.03);
+                   transform:scale(1.03);
+              -webkit-box-shadow:0 0 0 10px rgba($value,0);
+              box-shadow: 0 0 0 10px rgba($value,0);     
+            }  
+            100%{
+                -webkit-transform:scale(1);
+                -ms-transform:scale(1);
+                  transform:scale(1);
+              -webkit-box-shadow: 0 0 0 0px rgba($value,0);
+              box-shadow: 0 0 0 0px rgba($value,0);       
+          }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+

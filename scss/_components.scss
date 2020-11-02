@@ -1,0 +1,133 @@
+// Margins
+@include list-loop('.m-t-', 'margin-top');
+@include list-loop('.m-r-', 'margin-right');
+@include list-loop('.m-b-', 'margin-bottom');
+@include list-loop('.m-l-', 'margin-left');
+@include list-loop('.m-x-', 'margin');
+// Paddings
+@include list-loop('.p-t-', 'padding-top');
+@include list-loop('.p-r-', 'padding-right');
+@include list-loop('.p-b-', 'padding-bottom');
+@include list-loop('.p-l-', 'padding-left');
+@include list-loop('.p-x-', 'padding');
+
+.container{
+    padding: 1rem 2rem;
+    @include responsive(595){
+        padding: 1rem 3rem;
+    }
+    @include responsive(1224){
+        padding: 1rem 5rem;
+    }
+    @include responsive(1400){
+        max-width: 80%;
+        margin: auto;
+    }   
+}
+.bg{
+    &-primary{
+            background: -o-radial-gradient(set-radial-background($color-primary,$color-primary-light));
+            background:radial-gradient(set-radial-background($color-primary,$color-primary-light));
+
+        &-transparent{
+            background: -o-radial-gradient(set-radial-background($color-primary,$color-primary-light,0.7));
+            background:radial-gradient(set-radial-background($color-primary,$color-primary-light,0.7));
+        }
+     }
+     &-orange{
+         background: -o-radial-gradient(set-radial-background(#f5b542,#e37a42));
+        background:radial-gradient(set-radial-background(#f5b542,#e37a42));
+     }
+     &-blue{
+         background: -o-radial-gradient(set-radial-background(#5094fa,#4540ca));
+        background:radial-gradient(set-radial-background(#5094fa,#4540ca));
+
+     }
+     &-dark{
+         @include set-background($color-dark)  
+     }
+     &-white{
+         @include set-background($color-white)
+     }   
+}
+.overlay{
+    width: 100%;
+    height: 100%;   
+}
+.img-fluid{
+    @extend .overlay;
+}
+.text{
+    &-primary{ 
+        background: -o-radial-gradient(set-radial-background($color-primary,$color-primary-light));
+        background: radial-gradient(set-radial-background($color-primary,$color-primary-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    &-dark{
+        color:$color-dark;
+    }
+    &-white{
+        color:$color-white;
+    }  
+}
+.btn-container{
+    display: inline-block;
+    border-radius: 25px;
+    margin-top: 4rem;
+    .btn{
+        border: none;
+        outline: none;
+        padding:1rem 2rem;
+        text-transform: uppercase;
+        border-radius: 25px;
+        @include responsive(307){
+            padding: 1rem 1.5rem;
+        }
+      &-primary{
+            background: -o-radial-gradient(set-radial-background($color-primary,$color-primary-light));
+            background:radial-gradient(set-radial-background($color-primary,$color-primary-light));
+            color:$color-white; 
+        }
+    } 
+}
+.flex{ 
+   &.vertical-center-align{
+     @include flex(center,initial)
+   }
+   &.horizontal-center-align{
+     @include flex(initial,center)
+   }
+}
+.link{
+    text-decoration: none;
+    color:$color-primary ;
+    border-bottom: 1px solid $color-primary-light;
+&:hover{
+    @include set-background($color-primary);
+}
+}
+.clip-path{
+
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+}
+.title{
+    @include font($font-small,600);
+}
+.site-container{
+    @include flex(center,space-between);
+    flex-wrap: wrap;
+    height: 100%;
+}
+.brand{
+    display: block;
+    width: 80px;
+    img{
+        filter: brightness(0) invert(1);
+        display: block;
+        height: 70px;
+    }
+}
+

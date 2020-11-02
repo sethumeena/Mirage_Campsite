@@ -1,0 +1,23 @@
+@import "base";
+@import "media";
+@import "components";
+@import "layout";
+
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing:border-box;
+    box-sizing: border-box;
+}
+body{
+    font-family:'Open Sans', sans-serif; 
+    width: 100%;
+    height: 100%;
+    @include set-background(whitesmoke);
+    overflow-x: hidden;
+}
+img{
+    height: 100%;
+    width: 100%;
+}
+
