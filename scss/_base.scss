@@ -142,7 +142,7 @@ $btn-hover:(
                animation: pulse-#{$color} 1s ease infinite;
         }
         @keyframes pulse-#{$color} {
-            0%{
+            1%{
                 -webkit-transform:scale(1);
                  -ms-transform:scale(1);
                    transform:scale(1);
